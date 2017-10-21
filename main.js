@@ -12,22 +12,17 @@ fs.readFile("wordlist.txt","utf-8", function(error,data){
 	var wordlist= data.split("\r\n");
 	var wordToGuess = wordlist[Math.floor(Math.random()*wordlist.length)];
 	wordToGuess = new Word(wordToGuess);
-	
-
-	var remainingGuesses = 10;
-
 	var startGame = function(word){
 		remainingGuesses = 10;
 		wordToGuess.getLettersInWord();
 		promptUser();
-	}
-	
+	};
 	var resetGame = function(){
 		wordToGuess = wordlist[Math.floor(Math.random()*wordlist.length)];
 		wordToGuess = new Word(wordToGuess);
 		console.log("\n");
 		startGame();
-	}
+	};
 	var playAgain = function(){
 		inquirer.prompt([
 		{
@@ -43,8 +38,7 @@ fs.readFile("wordlist.txt","utf-8", function(error,data){
 				return;
 			}
 		})
-	}
-
+	};
 	var promptUser = function(){
 		var guessedwords = [];
 		console.log("__________________________________");
@@ -81,7 +75,6 @@ fs.readFile("wordlist.txt","utf-8", function(error,data){
 					//playAgain();
 				}
 			}
-
 			if((remainingGuesses > 0) && (wordToGuess.isGuessed === false) ){
 				console.log("Guesses remaining: " + remainingGuesses);
 				promptUser();
@@ -95,11 +88,8 @@ fs.readFile("wordlist.txt","utf-8", function(error,data){
 				console.log(wordToGuess.displayWord(answers.guess));
 			
 			}
-
 		});
-
 	}
-
 	startGame();
 })
 
